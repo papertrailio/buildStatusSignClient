@@ -25,16 +25,18 @@ const pins = {
   ptapp2red: 31
 };
 
-const initLeds = () => Promise.resolve();
-Promise.all(
-  Object.keys(keys =>
-    keys.forEach(key =>
-      gpiop
-        .setup(pins[key], gpio.DIR_OUT)
-        .then(() => gpiop.write(pins[key], true))
+const initLeds = () => {
+  Promise.all(
+    Object.keys(keys =>
+      keys.forEach(key => {
+        console.log("setup pin", pins[key]);
+        return gpiop
+          .setup(pins[key], gpio.DIR_OUT)
+          .then(() => gpiop.write(pins[key], true));
+      })
     )
-  )
-);
+  );
+};
 
 const initStatuses = () => {
   const config = {
@@ -47,43 +49,43 @@ const initStatuses = () => {
 
 const setLeds = console.log;
 
-gpiop
-  .setup(8, gpio.DIR_OUT)
-  .then(() => {
-    return gpiop.write(8, true);
-  })
-  .catch(err => {
-    console.log("Error: ", err.toString());
-  });
+// gpiop
+//   .setup(8, gpio.DIR_OUT)
+//   .then(() => {
+//     return gpiop.write(8, true);
+//   })
+//   .catch(err => {
+//     console.log("Error: ", err.toString());
+//   });
 
-gpiop
-  .setup(7, gpio.DIR_OUT)
-  .then(() => {
-    return gpiop.write(7, true);
-  })
-  .catch(err => {
-    console.log("Error: ", err.toString());
-  });
+// gpiop
+//   .setup(7, gpio.DIR_OUT)
+//   .then(() => {
+//     return gpiop.write(7, true);
+//   })
+//   .catch(err => {
+//     console.log("Error: ", err.toString());
+//   });
 
-gpiop
-  .setup(5, gpio.DIR_OUT)
-  .then(() => {
-    return gpiop.write(5, false);
-  })
-  .catch(err => {
-    console.log("Error: ", err.toString());
-  });
-gpiop
-  .setup(3, gpio.DIR_OUT)
-  .then(() => {
-    return gpiop.write(3, false);
-  })
-  .catch(err => {
-    console.log("Error: ", err.toString());
-  });
+// gpiop
+//   .setup(5, gpio.DIR_OUT)
+//   .then(() => {
+//     return gpiop.write(5, false);
+//   })
+//   .catch(err => {
+//     console.log("Error: ", err.toString());
+//   });
+// gpiop
+//   .setup(3, gpio.DIR_OUT)
+//   .then(() => {
+//     return gpiop.write(3, false);
+//   })
+//   .catch(err => {
+//     console.log("Error: ", err.toString());
+//   });
 
-// initLeds().then(() => {
-//   const statuses = initStatuses();
+initLeds().then(() => {
+  const statuses = initStatuses();
 
-//   statuses.on("value", snapshot => setLeds(snapshot.val()));
-// });
+  statuses.on("value", snapshot => setLeds(snapshot.val()));
+});
