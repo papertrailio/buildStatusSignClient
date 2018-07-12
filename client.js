@@ -27,12 +27,14 @@ const pins = {
 
 const initLeds = () =>
   Promise.all(
-    Object.keys(pins).map(key => {
-      console.log("setup pin", pins[key]);
-      return gpiop
+    Object.keys(pins).map((key, index) =>
+      gpiop
         .setup(pins[key], gpio.DIR_OUT)
-        .then(() => gpiop.write(pins[key], true));
-    })
+        .then(() => {
+          gpiop.write(pins[key], false)
+          setTimeout(() => gpiop.write(pins[key], true), 1000 * index)
+        });
+    )
   );
 
 const initStatuses = () => {
