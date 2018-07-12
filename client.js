@@ -47,6 +47,15 @@ const initStatuses = () => {
 
 const setLeds = console.log;
 
+gpiop
+  .setup(8, gpio.DIR_OUT)
+  .then(() => {
+    return gpiop.write(8, true);
+  })
+  .catch(err => {
+    console.log("Error: ", err.toString());
+  });
+
 initLeds().then(() => {
   const statuses = initStatuses();
 
