@@ -56,8 +56,34 @@ gpiop
     console.log("Error: ", err.toString());
   });
 
-initLeds().then(() => {
-  const statuses = initStatuses();
+gpiop
+  .setup(7, gpio.DIR_OUT)
+  .then(() => {
+    return gpiop.write(7, true);
+  })
+  .catch(err => {
+    console.log("Error: ", err.toString());
+  });
 
-  statuses.on("value", snapshot => setLeds(snapshot.val()));
-});
+gpiop
+  .setup(5, gpio.DIR_OUT)
+  .then(() => {
+    return gpiop.write(5, false);
+  })
+  .catch(err => {
+    console.log("Error: ", err.toString());
+  });
+gpiop
+  .setup(3, gpio.DIR_OUT)
+  .then(() => {
+    return gpiop.write(3, false);
+  })
+  .catch(err => {
+    console.log("Error: ", err.toString());
+  });
+
+// initLeds().then(() => {
+//   const statuses = initStatuses();
+
+//   statuses.on("value", snapshot => setLeds(snapshot.val()));
+// });
