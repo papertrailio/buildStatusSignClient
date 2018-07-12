@@ -28,7 +28,7 @@ const pins = {
 const initLeds = () =>
   Promise.all(
     Object.keys(keys =>
-      keys.forEach(key => {
+      keys.map(key => {
         console.log("setup pin", pins[key]);
         return gpiop
           .setup(pins[key], gpio.DIR_OUT)
