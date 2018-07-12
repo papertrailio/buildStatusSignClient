@@ -25,7 +25,7 @@ const pins = {
   ptapp2red: 31
 };
 
-const initLeds = () => {
+const initLeds = () =>
   Promise.all(
     Object.keys(keys =>
       keys.forEach(key => {
@@ -36,7 +36,6 @@ const initLeds = () => {
       })
     )
   );
-};
 
 const initStatuses = () => {
   const config = {
