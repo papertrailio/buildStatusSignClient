@@ -28,10 +28,11 @@ const pins = {
 const initLeds = () => Promise.resolve();
 Promise.all(
   Object.keys(keys =>
-    keys.forEach(key => {
-      gpiop.setup(pins[key], gpio.DIR_OUT);
-      gpiop.write(pins[key], true);
-    })
+    keys.forEach(key =>
+      gpiop
+        .setup(pins[key], gpio.DIR_OUT)
+        .then(() => gpiop.write(pins[key], true))
+    )
   )
 );
 
