@@ -5,24 +5,24 @@ var gpio = require("rpi-gpio");
 var gpiop = gpio.promise;
 
 const pins = {
-  api1red: 3,
+  api1green: 3,
   api1amber: 5,
-  api1green: 7,
-  api2red: 8,
+  api1red: 7,
+  api2green: 8,
   api2amber: 10,
-  api2green: 11,
-  webclient1red: 12,
+  api2red: 11,
+  webclient1green: 12,
   webclient1amber: 13,
-  webclient1green: 15,
-  webclient2red: 16,
+  webclient1red: 15,
+  webclient2green: 16,
   webclient2amber: 18,
-  webclient2green: 19,
-  ptapp1red: 21,
+  webclient2red: 19,
+  ptapp1green: 21,
   ptapp1amber: 22,
-  ptapp1green: 23,
-  ptapp2red: 24,
+  ptapp1red: 23,
+  ptapp2green: 24,
   ptapp2amber: 26,
-  ptapp2green: 31
+  ptapp2red: 31
 };
 
 const initLeds = () => Promise.resolve();
@@ -30,6 +30,7 @@ Promise.all(
   Object.keys(keys =>
     keys.forEach(key => {
       gpiop.setup(pins[key], gpio.DIR_OUT);
+      gpiop.write(pins[key], true);
     })
   )
 );
