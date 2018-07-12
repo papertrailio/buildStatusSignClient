@@ -2,7 +2,7 @@
   "dependencies": {
     "dotenv": "^6.0.0",
     "firebase": "^5.2.0",
-    "rpi-gpio": "^1.0.0"
+    "rpi-gpio": "JamesBarwell/rpi-gpio.js#v2"
   },
   "scripts": {
     "start": "pm2 start client.js",

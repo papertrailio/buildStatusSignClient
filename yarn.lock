@@ -146,17 +146,19 @@ ascli@~1:
     colour "~0.7.1"
     optjs "~3.2.2"
 
-async@1.5.2:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
+async@^2.6.0:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/async/-/async-2.6.1.tgz#b245a23ca71930044ec53fa46aa00a3e87c6a610"
+  dependencies:
+    lodash "^4.17.10"
 
 balanced-match@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.0.tgz#89b4d199ab2bee49de164ea02b89ce462d71b767"
 
-bindings@~1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.2.1.tgz#14ad6113812d2d37d72e67b4cacb4bb726505f11"
+bindings@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/bindings/-/bindings-1.3.0.tgz#b346f6ecf6a95f5a815c5839fc7cdb22502f1ed7"
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -211,9 +213,15 @@ core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
-debug@2.6.9, debug@^2.1.2:
+debug@^2.1.2:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
+  dependencies:
+    ms "2.0.0"
+
+debug@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/debug/-/debug-3.1.0.tgz#5bb5a0672628b64149566ba16819e61518c67261"
   dependencies:
     ms "2.0.0"
 
@@ -247,12 +255,12 @@ encoding@^0.1.11:
   dependencies:
     iconv-lite "~0.4.13"
 
-epoll@0.1.22:
-  version "0.1.22"
-  resolved "https://registry.yarnpkg.com/epoll/-/epoll-0.1.22.tgz#1ab9a637cff11a20970c888b1ca2178b64cf5291"
+epoll@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/epoll/-/epoll-2.0.1.tgz#4742f963048fab6ad4347f678b0e9e38d58a417e"
   dependencies:
-    bindings "~1.2.1"
-    nan "~2.6.2"
+    bindings "^1.3.0"
+    nan "^2.10.0"
 
 faye-websocket@0.11.1:
   version "0.11.1"
@@ -386,7 +394,7 @@ lcid@^1.0.0:
   dependencies:
     invert-kv "^1.0.0"
 
-lodash@^4.15.0:
+lodash@^4.15.0, lodash@^4.17.10:
   version "4.17.10"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.10.tgz#1b7793cf7259ea38fb3661d4d38b3260af8ae4e7"
 
@@ -431,13 +439,9 @@ ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
 
-nan@^2.0.0:
+nan@^2.0.0, nan@^2.10.0:
   version "2.10.0"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.10.0.tgz#96d0cd610ebd58d4b4de9cc0c6828cda99c7548f"
-
-nan@~2.6.2:
-  version "2.6.2"
-  resolved "https://registry.yarnpkg.com/nan/-/nan-2.6.2.tgz#e4ff34e6c95fdfb5aecc08de6596f43605a7db45"
 
 needle@^2.2.1:
   version "2.2.1"
@@ -547,9 +551,9 @@ promise-polyfill@7.1.2:
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/promise-polyfill/-/promise-polyfill-7.1.2.tgz#ab05301d8c28536301622d69227632269a70ca3b"
 
-promise@7.1.1:
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/promise/-/promise-7.1.1.tgz#489654c692616b8aa55b0724fa809bb7db49c5bf"
+promise@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/promise/-/promise-8.0.1.tgz#e45d68b00a17647b6da711bf85ed6ed47208f450"
   dependencies:
     asap "~2.0.3"
 
@@ -589,14 +593,14 @@ rimraf@^2.6.1:
   dependencies:
     glob "^7.0.5"
 
-rpi-gpio@^1.0.0:
+rpi-gpio@JamesBarwell/rpi-gpio.js#v2:
   version "1.0.0"
-  resolved "https://registry.yarnpkg.com/rpi-gpio/-/rpi-gpio-1.0.0.tgz#0627fea1e290d1b49ecf3ca789ed9bfb36307405"
+  resolved "https://codeload.github.com/JamesBarwell/rpi-gpio.js/tar.gz/e8b3a143c7d2e57fa81818d45ff55fd01c5c6843"
   dependencies:
-    async "1.5.2"
-    debug "2.6.9"
-    epoll "0.1.22"
-    promise "7.1.1"
+    async "^2.6.0"
+    debug "^3.1.0"
+    epoll "^2.0.1"
+    promise "^8.0.1"
 
 safe-buffer@^5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   version "5.1.2"
