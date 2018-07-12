@@ -7,22 +7,22 @@ var gpiop = gpio.promise;
 const pins = {
   api1green: 3,
   api1amber: 5,
-  api1red: 7,
-  api2green: 8,
-  api2amber: 10,
-  api2red: 11,
-  webclient1green: 12,
-  webclient1amber: 13,
-  webclient1red: 15,
-  webclient2green: 16,
-  webclient2amber: 18,
-  webclient2red: 19,
-  ptapp1green: 21,
-  ptapp1amber: 22,
-  ptapp1red: 23,
-  ptapp2green: 24,
-  ptapp2amber: 26,
-  ptapp2red: 31
+  api1red: 9,
+  api2green: 10,
+  api2amber: 11,
+  api2red: 12,
+  webclient1green: 13,
+  webclient1amber: 15,
+  webclient1red: 16,
+  webclient2green: 17,
+  webclient2amber: 19,
+  webclient2red: 21,
+  ptapp1green: 22,
+  ptapp1amber: 23,
+  ptapp1red: 24,
+  ptapp2green: 37,
+  ptapp2amber: 38,
+  ptapp2red: 40
 };
 
 const initLeds = () =>
