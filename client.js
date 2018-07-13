@@ -19,7 +19,7 @@ const pins = {
   webclient2red: 21,
   ptapp1green: 22,
   ptapp1amber: 23,
-  ptapp1red: 24,
+  ptapp1red: 25,
   ptapp2green: 37,
   ptapp2amber: 38,
   ptapp2red: 40
