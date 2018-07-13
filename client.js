@@ -17,12 +17,12 @@ const pins = {
   webclient2green: 18,
   webclient2amber: 19,
   webclient2red: 21,
-  ptapp1green: 22,
-  ptapp1amber: 23,
-  ptapp1red: 25,
-  ptapp2green: 37,
-  ptapp2amber: 38,
-  ptapp2red: 40
+  ptapp1green: 23,
+  ptapp1amber: 24,
+  ptapp1red: 26,
+  ptapp2green: 35,
+  ptapp2amber: 36,
+  ptapp2red: 37
 };
 
 const initLeds = () =>
