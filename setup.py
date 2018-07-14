@@ -9,8 +9,7 @@ setup(name='buildStatusSignClient',
       license='MIT',
       packages=['buildStatusSignClient'],
       install_requires=[
-          'RPi.GPIO',
           'requests',
-          'python-firebase',
+          'Pyrebase',
       ],
       zip_safe=False)
