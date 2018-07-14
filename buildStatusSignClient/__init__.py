@@ -69,8 +69,8 @@ db = firebase.database()
 def resetPinsForProject(projectName):
     for build in pins[projectName]:
         for color in build.iteritems():
-            pins[projectName][build][color]["state"] = OFF
-            GPIO.output(pins[projectName][build][color]["pin"], GPIO.LOW)
+            color["state"] = OFF
+            GPIO.output(color["pin"], GPIO.LOW)
 
 
 def setPinStates(projectName, projectStates):
@@ -80,9 +80,8 @@ def setPinStates(projectName, projectStates):
 def stream_handler(message):
     statuses = db.child("statuses").get()
     for project in statuses.each():
-        print(project.key())  # Morty
+        print(project.key())
         print(project.val())
-        print('data', project.key(), project.val())
         setPinStates(project.key(), project.val())
         print('pins', pins)
 
