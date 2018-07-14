@@ -22,19 +22,18 @@ config = {
 firebase = pyrebase.initialize_app(config)
 
 db = firebase.database()
-statuses = db.child("statuses")
 
 
 def stream_handler(message):
-    statuses.get()
-    print(statuses.val())
+    statuses = db.child("statuses").get().val()
+    print(statuses)
     # print(users.val())
     # print(message["path"])  # /-K7yGTTEp7O549EzTYtI
     # print(message["data"])  # {'title': 'Pyrebase', "body": "etc..."}
 
 
 def run():
-    my_stream = statuses.stream(stream_handler)
+    my_stream = db.child("statuses").stream(stream_handler)
 
     # while True:
 
