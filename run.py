@@ -1,2 +1,3 @@
 import buildStatusSignClient
-print buildStatusSignClient.joke()
+
+print buildStatusSignClient.run()
