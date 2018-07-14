@@ -2,6 +2,9 @@ import RPi.GPIO as GPIO
 import time
 import pyrebase
 
+GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
+
 OFF = 'OFF'
 ON = 'ON'
 FLASH = 'FLASH'
@@ -53,9 +56,6 @@ for key, project in pins.iteritems():
             print('pin ', color, value)
             GPIO.setup(value["pin"], GPIO.OUT)
             GPIO.output(value["pin"], GPIO.HIGH)
-
-GPIO.setmode(GPIO.BOARD)
-GPIO.setwarnings(False)
 
 config = {
     "authDomain": "buildstatussign.firebaseapp.com",
