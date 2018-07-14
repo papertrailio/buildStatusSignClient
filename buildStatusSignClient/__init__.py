@@ -69,6 +69,7 @@ db = firebase.database()
 def resetPinsForProject(projectName):
     for build in pins[projectName]:
         for color in build.iteritems():
+            print('color', color)
             # color["state"] = OFF
             GPIO.output(color["pin"], GPIO.LOW)
 
