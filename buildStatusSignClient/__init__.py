@@ -51,8 +51,8 @@ for key, project in pins.iteritems():
         print('build ', build)
         for color, value in build.iteritems():
             print('pin ', color, value)
-            GPIO.setup(value.pin, GPIO.OUT)
-            GPIO.output(value.pin, GPIO.HIGH)
+            GPIO.setup(value["pin"], GPIO.OUT)
+            GPIO.output(value["pin"], GPIO.HIGH)
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
