@@ -93,8 +93,6 @@ def switchGPIOs(flashState):
 
 
 def setStateForProjectBuild(buildPins, buildBuildState):
-    print("setStateForProjectBuild", buildBuildState)
-
     if buildBuildState == 'success':
         buildPins[GREEN]["state"] = ON
         buildPins[AMBER]["state"] = OFF
