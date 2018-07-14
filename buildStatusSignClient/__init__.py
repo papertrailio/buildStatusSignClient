@@ -99,6 +99,14 @@ def setStateForProjectBuild(buildPins, buildBuildState):
         buildPins[GREEN]["state"] = ON
         buildPins[AMBER]["state"] = OFF
         buildPins[RED]["state"] = OFF
+    elif buildBuildState == 'stopped':
+        buildPins[GREEN]["state"] = OFF
+        buildPins[AMBER]["state"] = ON
+        buildPins[RED]["state"] = OFF
+    elif buildBuildState == 'testing':
+        buildPins[GREEN]["state"] = OFF
+        buildPins[AMBER]["state"] = FLASH
+        buildPins[RED]["state"] = OFF
     else:
         buildPins[GREEN]["state"] = OFF
         buildPins[AMBER]["state"] = OFF
