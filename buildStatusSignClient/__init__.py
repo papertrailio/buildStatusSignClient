@@ -87,7 +87,7 @@ def switchGPIOs():
                     if FLASH_STATE == OFF:
                         GPIO.output(colorState["pin"], GPIO.LOW)
                     else:
-                      GPIO.output(colorState["pin"], GPIO.HIGH)
+                        GPIO.output(colorState["pin"], GPIO.HIGH)
                 else:
                     GPIO.output(colorState["pin"], GPIO.HIGH)
 
@@ -136,10 +136,9 @@ def run():
     setup()
     streamData()
     while True:
+        switchGPIOs()
         FLASH_STATE = OFF
         time.sleep(1)
+        switchGPIOs()
         FLASH_STATE = ON
         time.sleep(1)
-
-    while True:
-        switchGPIOs()
