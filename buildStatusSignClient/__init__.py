@@ -10,7 +10,7 @@ ON = 'ON'
 FLASH = 'FLASH'
 
 pins = {
-    'webslient': [
+    'webclient': [
         {
             'green': {'pin': 7, 'state': OFF},
             'amber': {'pin': 11, 'state': OFF},
@@ -29,8 +29,8 @@ pins = {
             'red': {'pin': 23, 'state': OFF}
         },
         {
-            'green': {'pin': 26, 'state': OFF},
-            'amber': {'pin': 29, 'state': OFF},
+            'green': {'pin': 29, 'state': OFF},
+            'amber': {'pin': 31, 'state': OFF},
             'red': {'pin': 32, 'state': OFF}
         },
     ],
@@ -50,9 +50,10 @@ pins = {
 
 for key, project in pins.iteritems():
     for build in project:
-        for color, value in build.iteritems():
-            GPIO.setup(value["pin"], GPIO.OUT)
-            GPIO.output(value["pin"], GPIO.HIGH)
+        for colorName, colorState in build.iteritems():
+            GPIO.setup(colorState["pin"], GPIO.OUT)
+            colorState["state"] = ON
+            GPIO.output(colorState["pin"], GPIO.HIGH)
 
 config = {
     "authDomain": "buildstatussign.firebaseapp.com",
@@ -83,6 +84,7 @@ def stream_handler(message):
     for project in statuses.each():
         print(project.key())
         print(project.val())
+        print('pins', pins)
         setPinStates(project.key(), project.val())
         print('pins', pins)
 
