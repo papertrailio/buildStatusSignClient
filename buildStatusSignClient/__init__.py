@@ -9,41 +9,45 @@ OFF = 'OFF'
 ON = 'ON'
 FLASH = 'FLASH'
 
+GREEN = 'green'
+AMBER = 'amber'
+RED = 'red'
+
 pins = {
     'webclient': [
         {
-            'green': {'pin': 7, 'state': OFF},
-            'amber': {'pin': 11, 'state': OFF},
-            'red': {'pin': 12, 'state': OFF}
+            GREEN: {'pin': 7, 'state': OFF},
+            AMBER: {'pin': 11, 'state': OFF},
+            RED: {'pin': 12, 'state': OFF}
         },
         {
-            'green': {'pin': 13, 'state': OFF},
-            'amber': {'pin': 15, 'state': OFF},
-            'red': {'pin': 16, 'state': OFF}
+            GREEN: {'pin': 13, 'state': OFF},
+            AMBER: {'pin': 15, 'state': OFF},
+            RED: {'pin': 16, 'state': OFF}
         },
     ],
     'api': [
         {
-            'green': {'pin': 18, 'state': OFF},
-            'amber': {'pin': 22, 'state': OFF},
-            'red': {'pin': 23, 'state': OFF}
+            GREEN: {'pin': 18, 'state': OFF},
+            AMBER: {'pin': 22, 'state': OFF},
+            RED: {'pin': 23, 'state': OFF}
         },
         {
-            'green': {'pin': 29, 'state': OFF},
-            'amber': {'pin': 31, 'state': OFF},
-            'red': {'pin': 32, 'state': OFF}
+            GREEN: {'pin': 29, 'state': OFF},
+            AMBER: {'pin': 31, 'state': OFF},
+            RED: {'pin': 32, 'state': OFF}
         },
     ],
     'ptapp': [
         {
-            'green': {'pin': 33, 'state': OFF},
-            'amber': {'pin': 35, 'state': OFF},
-            'red': {'pin': 36, 'state': OFF}
+            GREEN: {'pin': 33, 'state': OFF},
+            AMBER: {'pin': 35, 'state': OFF},
+            RED: {'pin': 36, 'state': OFF}
         },
         {
-            'green': {'pin': 37, 'state': OFF},
-            'amber': {'pin': 38, 'state': OFF},
-            'red': {'pin': 40, 'state': OFF}
+            GREEN: {'pin': 37, 'state': OFF},
+            AMBER: {'pin': 38, 'state': OFF},
+            RED: {'pin': 40, 'state': OFF}
         },
     ]
 }
@@ -88,9 +92,13 @@ def setStateForProjectBuild(buildPins, buildBuildState):
     print("setStateForProjectBuild", buildBuildState)
 
     if buildBuildState == 'success':
-        buildPins["green"]["state"] = ON
+        buildPins[GREEN]["state"] = ON
+        buildPins[AMBER]["state"] = OFF
+        buildPins[RED]["state"] = OFF
     else:
-        buildPins["green"]["state"] = OFF
+        buildPins[GREEN]["state"] = OFF
+        buildPins[AMBER]["state"] = OFF
+        buildPins[RED]["state"] = ON
 
 
 def setStateForProjectBuilds(projectName, projectBuildStates):
