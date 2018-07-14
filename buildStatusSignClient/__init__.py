@@ -31,7 +31,7 @@ pins = {
         {
             'green': {'pin': 26, 'state': OFF},
             'amber': {'pin': 29, 'state': OFF},
-            'red': {'pin': 31, 'state': OFF}
+            'red': {'pin': 32, 'state': OFF}
         },
     ],
     'ptapp': [
