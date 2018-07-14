@@ -71,21 +71,20 @@ db = firebase.database()
 
 
 def switchGPIOs():
-    while True:
-        for key, projectData in pins.iteritems():
-            for build in projectData:
-                for key, colorState in build.iteritems():
-                    if colorState["state"] == OFF:
-                        GPIO.output(colorState["pin"], GPIO.LOW)
-                    else:
-                        GPIO.output(colorState["pin"], GPIO.HIGH)
+    for key, projectData in pins.iteritems():
+        for build in projectData:
+            for key, colorState in build.iteritems():
+                if colorState["state"] == OFF:
+                    GPIO.output(colorState["pin"], GPIO.LOW)
+                else:
+                    GPIO.output(colorState["pin"], GPIO.HIGH)
 
 
-def resetStateForProject(projectName):
-    for build in pins[projectName]:
-        for key, colorState in build.iteritems():
-            print('color state', colorState)
-            colorState["state"] = OFF
+# def resetStateForProject(projectName):
+#     for build in pins[projectName]:
+#         for key, colorState in build.iteritems():
+#             print('color state', colorState)
+#             colorState["state"] = OFF
 
 
 def setStateForProjectBuild(buildPins, buildBuildState):
@@ -107,7 +106,6 @@ def setStateForProjectBuilds(projectName, projectBuildStates):
 
 
 def setPinStates(projectName, projectBuilds):
-    resetStateForProject(projectName)
     setStateForProjectBuilds(projectName, projectBuilds)
 
 
@@ -115,6 +113,7 @@ def stream_handler(message):
     statuses = db.child("statuses").get()
     for project in statuses.each():
         setPinStates(project.key(), project.val())
+        switchGPIOs()
 
 
 def streamData():
@@ -123,5 +122,3 @@ def streamData():
 
 def run():
     streamData()
-
-    switchGPIOs()
