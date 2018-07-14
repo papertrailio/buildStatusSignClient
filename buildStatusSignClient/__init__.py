@@ -21,7 +21,8 @@ def run():
         GPIO.output(pin, GPIO.LOW)
 
     config = {
-        "databaseURL": "https://buildstatussign.firebaseio.com"
+        "databaseURL": "https://buildstatussign.firebaseio.com",
+        "apiKey": "apiKey",
     }
 
     firebase = pyrebase.initialize_app(config)
