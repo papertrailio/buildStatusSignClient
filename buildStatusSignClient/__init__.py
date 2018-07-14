@@ -45,9 +45,12 @@ pins = {
     ]
 }
 
-for project in pins.iteritems():
+for key, project in pins.iteritems():
+    print('project ', project)
     for build in project:
+        print('build ', build)
         for color, value in build.iteritems():
+            print('pin ', color, value)
             GPIO.setup(value.pin, GPIO.OUT)
             GPIO.output(value.pin, GPIO.HIGH)
 
