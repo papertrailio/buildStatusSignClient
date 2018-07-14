@@ -80,8 +80,8 @@ def setPinStates(statuses):
 
 def stream_handler(message):
     statuses = db.child("statuses").get().val()
-    print('data', statuses["data"])
-    setPinStates(statuses["data"])
+    print('data', statuses)
+    setPinStates(statuses)
     print('pins', pins)
     # print(users.val())
     # print(message["path"])  # /-K7yGTTEp7O549EzTYtI
