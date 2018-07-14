@@ -26,6 +26,7 @@ statuses = db.child("statuses")
 
 
 def stream_handler(message):
+    statuses.get()
     print(statuses.val())
     # print(users.val())
     # print(message["path"])  # /-K7yGTTEp7O549EzTYtI
