@@ -73,18 +73,18 @@ def setup():
                 GPIO.setup(colorState["pin"], GPIO.OUT)
                 colorState["state"] = ON
 
-    switchGPIOs()
+    switchGPIOs(OFF)
     time.sleep(2)
 
 
-def switchGPIOs():
+def switchGPIOs(flashState):
     for key, projectData in pins.iteritems():
         for build in projectData:
             for key, colorState in build.iteritems():
                 if colorState["state"] == OFF:
                     GPIO.output(colorState["pin"], GPIO.LOW)
                 elif colorState["state"] == FLASH:
-                    if FLASH_STATE == OFF:
+                    if flashState == OFF:
                         GPIO.output(colorState["pin"], GPIO.LOW)
                     else:
                         GPIO.output(colorState["pin"], GPIO.HIGH)
@@ -136,9 +136,7 @@ def run():
     setup()
     streamData()
     while True:
-        switchGPIOs()
-        FLASH_STATE = OFF
+        switchGPIOs(ON)
         time.sleep(1)
-        switchGPIOs()
-        FLASH_STATE = ON
+        switchGPIOs(OFF)
         time.sleep(1)
