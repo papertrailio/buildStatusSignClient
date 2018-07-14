@@ -49,11 +49,8 @@ pins = {
 }
 
 for key, project in pins.iteritems():
-    print('project ', project)
     for build in project:
-        print('build ', build)
         for color, value in build.iteritems():
-            print('pin ', color, value)
             GPIO.setup(value["pin"], GPIO.OUT)
             GPIO.output(value["pin"], GPIO.HIGH)
 
@@ -69,22 +66,23 @@ firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
 
-def resetPins(name):
-    for build in pins[name]:
+def resetPinsForProject(projectName):
+    for build in pins[projectName]:
         for color in build.iteritems():
-            build[color]["state"] = ON
+            build[color]["state"] = OFF
+            GPIO.output(value["pin"], GPIO.LOW)
 
 
 def setPinStates(statuses):
-    for key in statuses.iteritems():
-        resetPins(statuses[key])
+    for projectName in statuses.iteritems():
+        resetPinsForProject(projectName)
 
 
 def stream_handler(message):
     statuses = db.child("statuses").get().val()
-    print('data', statuses)
-    setPinStates(statuses)
-    print('pins', statuses)
+    print('data', statuses["data"])
+    setPinStates(statuses["data"])
+    print('pins', pins)
     # print(users.val())
     # print(message["path"])  # /-K7yGTTEp7O549EzTYtI
     # print(message["data"])  # {'title': 'Pyrebase', "body": "etc..."}
