@@ -24,6 +24,7 @@ def run():
         "authDomain": "buildstatussign.firebaseapp.com",
         "databaseURL": "https://buildstatussign.firebaseio.com",
         "apiKey": "AIzaSyBKSq7AaHLrp4PPj3l54LBFza3HFWXO8f4",
+        "storageBucket": "buildstatussign.appspot.com"
     }
 
     firebase = pyrebase.initialize_app(config)
