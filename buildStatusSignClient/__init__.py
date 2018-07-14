@@ -73,19 +73,18 @@ def resetPinsForProject(projectName):
             GPIO.output(value["pin"], GPIO.LOW)
 
 
-def setPinStates(statuses):
-    for projectName in statuses.iteritems():
-        resetPinsForProject(projectName)
+def setPinStates(projectName, projectStates):
+    resetPinsForProject(projectName)
 
 
 def stream_handler(message):
-    statuses = db.child("statuses").get().val()
-    print('data', statuses)
-    setPinStates(statuses)
-    print('pins', pins)
-    # print(users.val())
-    # print(message["path"])  # /-K7yGTTEp7O549EzTYtI
-    # print(message["data"])  # {'title': 'Pyrebase', "body": "etc..."}
+    statuses = db.child("statuses").get()
+    for project in statuses.each():
+        print(project.key())  # Morty
+        print(project.val())
+        print('data', project.key(), project.val())
+        setPinStates(project.key(), project.val())
+        print('pins', pins)
 
 
 def streamData():
