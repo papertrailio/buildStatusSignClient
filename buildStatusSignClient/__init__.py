@@ -53,7 +53,6 @@ for key, project in pins.iteritems():
         for colorName, colorState in build.iteritems():
             GPIO.setup(colorState["pin"], GPIO.OUT)
             colorState["state"] = ON
-            GPIO.output(colorState["pin"], GPIO.HIGH)
 
 config = {
     "authDomain": "buildstatussign.firebaseapp.com",
@@ -67,12 +66,21 @@ firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
 
+def switchGPIOs():
+    for key, projectData in pins.iteritems():
+        for build in projectData:
+            for key, colorState in build.iteritems():
+                if colorState["state"] == OFF:
+                    GPIO.output(colorState["pin"], GPIO.LOW)
+                else:
+                    GPIO.output(colorState["pin"], GPIO.HIGH)
+
+
 def resetPinsForProject(projectName):
     for build in pins[projectName]:
-        for colorName, colorState in build.iteritems():
+        for key, colorState in build.iteritems():
             print('color state', colorState)
             colorState["state"] = OFF
-            GPIO.output(colorState["pin"], GPIO.LOW)
 
 
 def setPinStates(projectName, projectStates):
@@ -95,6 +103,9 @@ def streamData():
 
 def run():
     streamData()
+
+    while True:
+        switchGPIOs()
 
     # while True:
 
