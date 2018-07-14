@@ -13,6 +13,8 @@ GREEN = 'green'
 AMBER = 'amber'
 RED = 'red'
 
+FLASH_STATE = OFF
+
 pins = {
     'webclient': [
         {
@@ -81,15 +83,13 @@ def switchGPIOs():
             for key, colorState in build.iteritems():
                 if colorState["state"] == OFF:
                     GPIO.output(colorState["pin"], GPIO.LOW)
+                elif colorState["state"] == FLASH:
+                    if FLASH_STATE == OFF:
+                        GPIO.output(colorState["pin"], GPIO.LOW)
+                    else:
+                      GPIO.output(colorState["pin"], GPIO.HIGH)
                 else:
                     GPIO.output(colorState["pin"], GPIO.HIGH)
-
-
-# def resetStateForProject(projectName):
-#     for build in pins[projectName]:
-#         for key, colorState in build.iteritems():
-#             print('color state', colorState)
-#             colorState["state"] = OFF
 
 
 def setStateForProjectBuild(buildPins, buildBuildState):
@@ -126,7 +126,6 @@ def stream_handler(message):
     statuses = db.child("statuses").get()
     for project in statuses.each():
         setPinStates(project.key(), project.val())
-        switchGPIOs()
 
 
 def streamData():
@@ -136,3 +135,11 @@ def streamData():
 def run():
     setup()
     streamData()
+    while True:
+        FLASH_STATE = OFF
+        time.sleep(1)
+        FLASH_STATE = ON
+        time.sleep(1)
+
+    while True:
+        switchGPIOs()
