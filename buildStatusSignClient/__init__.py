@@ -2,8 +2,50 @@ import RPi.GPIO as GPIO
 import time
 import pyrebase
 
-pins = [7, 11, 12, 13, 15, 16, 18, 22, 23,
-        26, 29, 31, 33, 35, 36, 37, 38, 40]
+OFF = 'OFF'
+ON = 'ON'
+FLASH = 'FLASH'
+
+pins = {
+    'webslient': [
+        {
+            'green': {'pin': 7, 'state': OFF},
+            'amber': {'pin': 11, 'state': OFF},
+            'red': {'pin': 12, 'state': OFF}
+        },
+        {
+            'green': {'pin': 13, 'state': OFF},
+            'amber': {'pin': 15, 'state': OFF},
+            'red': {'pin': 16, 'state': OFF}
+        },
+    ],
+    'api': [
+        {
+            'green': {'pin': 18, 'state': OFF},
+            'amber': {'pin': 22, 'state': OFF},
+            'red': {'pin': 23, 'state': OFF}
+        },
+        {
+            'green': {'pin': 26, 'state': OFF},
+            'amber': {'pin': 29, 'state': OFF},
+            'red': {'pin': 31, 'state': OFF}
+        },
+    ],
+    'ptapp': [
+        {
+            'green': {'pin': 33, 'state': OFF},
+            'amber': {'pin': 35, 'state': OFF},
+            'red': {'pin': 36, 'state': OFF}
+        },
+        {
+            'green': {'pin': 37, 'state': OFF},
+            'amber': {'pin': 38, 'state': OFF},
+            'red': {'pin': 40, 'state': OFF}
+        },
+    ]
+}
+
+pinStates = []
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
@@ -24,16 +66,33 @@ firebase = pyrebase.initialize_app(config)
 db = firebase.database()
 
 
+def resetPins(name):
+    for build in pins[name]:
+        for color in build.iteritems():
+            build[color]["state"] = ON
+
+
+def setPinStates(statuses):
+    for key in statuses.iteritems():
+        resetPins(statuses[key])
+
+
 def stream_handler(message):
     statuses = db.child("statuses").get().val()
-    print(statuses)
+    print('data', statuses)
+    setPinStates(statuses)
+    print('pins', statuses)
     # print(users.val())
     # print(message["path"])  # /-K7yGTTEp7O549EzTYtI
     # print(message["data"])  # {'title': 'Pyrebase', "body": "etc..."}
 
 
+def streamData():
+    db.child("statuses").stream(stream_handler)
+
+
 def run():
-    my_stream = db.child("statuses").stream(stream_handler)
+    streamData()
 
     # while True:
 
