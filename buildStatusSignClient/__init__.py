@@ -45,14 +45,14 @@ pins = {
     ]
 }
 
-pinStates = []
+for project in pins.iteritems():
+    for build in project:
+        for color, value in build.iteritems():
+            GPIO.setup(value.pin, GPIO.OUT)
+            GPIO.output(value.pin, GPIO.HIGH)
 
 GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
-
-for pin in pins:
-    GPIO.setup(pin, GPIO.OUT)
-    GPIO.output(pin, GPIO.LOW)
 
 config = {
     "authDomain": "buildstatussign.firebaseapp.com",
